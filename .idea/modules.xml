@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/online-internship-ms.iml" filepath="$PROJECT_DIR$/.idea/online-internship-ms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/online-internship-ms-backend/online-internship-ms-backend.iml" filepath="$PROJECT_DIR$/online-internship-ms-backend/online-internship-ms-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/online-internship-ms-frontend/online-internship-ms-frontend.iml" filepath="$PROJECT_DIR$/online-internship-ms-frontend/online-internship-ms-frontend.iml" />
+    </modules>
+  </component>
+</project>
