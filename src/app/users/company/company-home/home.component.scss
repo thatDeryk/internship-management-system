@@ -1,0 +1,50 @@
+.mdl-layout__content{
+  display: flex;
+}
+
+.mdl-grid{
+  max-width: 99%;
+  width: 100%;
+  padding-top: 15px;
+
+}
+.instruction-card{
+  .mdl-card__title{
+    border-bottom: 1px black solid;
+  }
+}
+.notification-card{
+  max-height: 400px;
+}
+.notifaction-content{
+  max-height: 400px;
+  overflow-y: scroll;
+}
+p.step-item{
+  white-space:normal!important;
+}
+
+.list-step{
+  margin-bottom: 35px!important;
+}
+
+
+.notification-card{
+  max-height: 400px;
+}
+.notifaction-content{
+  height: 300px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.confirmation-status{
+  text-transform: capitalize;
+}
+
+.date-line {
+  font-size: 12px;
+  width: 160px;
+  z-index: 22;
+  margin-top: -25px;
+}

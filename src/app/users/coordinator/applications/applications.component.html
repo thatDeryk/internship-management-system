@@ -1,0 +1,72 @@
+<div class="log-table mdl-layout__content" [hidden]="isDetailLoaded">
+  <div class="mdl-grid">
+    <md-card class="mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col">
+      <md-card-header MdCardHeader class="mat-card-header">
+        <md-card-title class="mat-card-title">Internship Applications</md-card-title>
+        <md-card-subtitle>Applications By Students</md-card-subtitle>
+        <div class="mdl-card__menu">
+          <md-input-container floatPlaceholder="never" dividerColor="primary" class="search-input">
+            <input mdInput name="search" #search
+                   placeholder="Search">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+          </md-input-container>
+        </div>
+      </md-card-header>
+      <div class="table-container">
+        <table class="mdl-data-table mdl-js-data-table">
+          <thead>
+          <tr class="">
+            <th>#</th>
+            <th>Student Number</th>
+            <th class="mdl-data-table__cell--non-numeric">Student FullName</th>
+            <th class="mdl-data-table__cell--non-numeric">Application Date</th>
+            <th class="mdl-data-table__cell--non-numeric">Application Status</th>
+            <th class="mdl-data-table__cell--non-numeric">Rejection Reason</th>
+            <th class="mdl-data-table__cell--non-numeric"></th>
+          </tr>
+          </thead>
+          <tbody *ngIf="student_applications">
+          <tr class="" *ngFor="let application of student_applications | async">
+            <td>{{application.id}}</td>
+            <td>{{application.student_number}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{application.student_first_name}}
+              {{application.student_last_name}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{application.application_date | amDateFormat:'LL'}}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <md-chip-list>
+                <md-chip class="pending" *ngIf="application.application_status == 'pending'">
+                  {{application.application_status}}
+                </md-chip>
+                <md-chip class="rejected" *ngIf="application.application_status == 'rejected'">
+                  {{application.application_status}}
+                </md-chip>
+                <md-chip class="accepted" *ngIf="application.application_status == 'accepted'">
+                  {{application.application_status}}
+                </md-chip>
+              </md-chip-list>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{application.reject_reason}}</td>
+
+            <td class="mdl-data-table__cell--non-numeric">
+              <button md-raised-button (click)="viewApplication(application.application_id)">View Application</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <md-paginator #paginator
+                      [length]="total_page"
+                      [pageIndex]="pageIndex"
+                      [pageSize]="pageSize"
+                      (page)="pageChange($event)"
+                      [pageSizeOptions]="[10,20, 30, 50, 100]">
+        </md-paginator>
+
+      </div>
+    </md-card>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,21 @@
+<h5 mdDialogTitle>Please Enter reason for Declining this application</h5>
+
+<form name="declineForm" [formGroup]="reasonForm" (ngSubmit)="submitReason()">
+  <md-dialog-content>
+    <div class="login-form">
+
+      <md-input-container floatPlaceholder="auto" class="full-input-container">
+          <textarea mdInput mdTextareaAutosize name="reason" formControlName="reason" mdAutosizeMinRows="4" required
+                    placeholder="Reason"></textarea>
+        <md-error>
+          Please you need to provide a reason.
+        </md-error>
+      </md-input-container>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions class="dialog-action">
+    <button md-button mdDialogClose class="cancel-btn">Cancel</button>
+    <button md-button md-raised-button [disabled]="reasonForm.pristine">Submit</button>
+  </md-dialog-actions>
+</form>

@@ -1,0 +1,51 @@
+<div class=" mdl-layout__content">
+  <div class="mdl-grid">
+  <a *ngIf="isBackBtn" md-icon-button title="Go Back" routerLink="/">
+      <md-icon class="md-48">keyboard_backspace</md-icon>
+      Go Back
+    </a>
+    <md-card class="mdl-cell mdl-cell--12-col">
+      <md-tab-group [disableRipple]="false">
+        <md-tab label="Student">  <!-- Body -->
+        <div>
+         <div class="mdl-grid">
+           <md-card *ngFor="let studentHelp of studentHelpData" class="mdl-cell mdl-cell--4-col card-link" (click)="openHelpDialog(studentHelp)">
+           <md-card-header>
+            <md-card-title>{{studentHelp.title}}</md-card-title>
+            </md-card-header>
+            <img md-card-image [src]="studentHelp.imageTwo">
+           </md-card>
+         </div>
+        </div>
+        </md-tab>
+        <md-tab label="Company">  <!-- Body -->
+            <div>
+         <div class="mdl-grid">
+           <md-card *ngFor="let companyHelp of companyHelpData" class="mdl-cell mdl-cell--4-col card-link" (click)="openHelpDialog(companyHelp)">
+           <md-card-header>
+            <md-card-title>{{companyHelp.title}}</md-card-title>
+            </md-card-header>
+            <img md-card-image [src]="companyHelp.imageTwo">
+           </md-card>
+         </div>
+        </div>
+
+        </md-tab>
+        <md-tab label="Coordinator">  <!-- Body -->
+          <div>
+           <div class="mdl-grid">
+           <md-card *ngFor="let coordinator of coordinatorHelpData" class="mdl-cell mdl-cell--4-col card-link" (click)="openHelpDialog(coordinator)">
+           <md-card-header>
+            <md-card-title>{{coordinator.title}}</md-card-title>
+            </md-card-header>
+            <img md-card-image [src]="coordinator.imageTwo">
+           </md-card>
+         </div>
+        </div>
+
+        </md-tab>
+      </md-tab-group>
+    </md-card>
+  </div>
+
+</div>

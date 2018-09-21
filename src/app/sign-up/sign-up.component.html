@@ -1,0 +1,124 @@
+<div class="sign-page mdl-layout__content">
+  <div class="mdl-grid">
+
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" mode="indeterminate" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+
+    <md-card class="sign-up-card  mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+
+      <md-card-title-group>
+        <md-card-title>Student Sign-up</md-card-title>
+        <md-card-subtitle>Student sign up form</md-card-subtitle>
+      </md-card-title-group>
+      <form [formGroup]="studentSignUpForm" (ngSubmit)="onSubmit()">
+        <md-card-content>
+          <div class="mdl-typography--text-center mdl-typography--error errorMessage-span" *ngIf="errorMessage">
+            <span class="mat-input-error">{{errorMessage}}</span>
+          </div>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary">
+            <input mdInput formControlName="first_name" name="first_name" type="text" required
+                   placeholder="First Name">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-error>
+              Please enter your first name
+            </md-error>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary">
+            <input mdInput formControlName="last_name" name="last_name" type="text" required
+                   placeholder="Last Name">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-error>
+              Please enter your last name
+            </md-error>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary">
+            <input mdInput formControlName="email" name="email" type="email" email="true" required pattern
+                   placeholder="Email Address">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-error *ngIf="studentSignUpForm.controls['email'].hasError('required')">
+              Email is required
+            </md-error>
+            <md-error *ngIf="studentSignUpForm.controls['email'].hasError('pattern')">
+              Enter a valid email
+            </md-error>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary">
+            <input mdInput formControlName="student_number" minlength="6" maxlength="8" min="0"
+                   name="student_number" type="number" required
+                   placeholder="Student Number">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-error *ngIf="studentSignUpForm.controls['student_number'].hasError('required')">
+              Enter your student number
+            </md-error>
+            <md-error *ngIf="studentSignUpForm.controls['student_number'].hasError('MinMaxNumber')">
+              Student Number should be minimum of 6 digits and a maximum of 8 digits
+            </md-error>
+           <!-- <md-error *ngIf="studentSignUpForm.controls['student_number'].hasError('maxlength')">
+              Student Number should be max of 6 digits
+            </md-error>-->
+          </md-input-container>
+
+          <div>
+            <md-input-container floatPlaceholder="auto" dividerColor="primary">
+              <input mdInput formControlName="password" name="password" type="password" required minlength="6"
+                     placeholder="Password">
+              <span mdPrefix></span>
+              <span mdSuffix></span>
+              <md-error *ngIf="studentSignUpForm.controls['password'].hasError('required')">
+                Password is required
+              </md-error>
+              <md-error *ngIf="studentSignUpForm.controls['password'].hasError('minlength')">
+                Password is too short
+              </md-error>
+            </md-input-container>
+
+            <md-input-container floatPlaceholder="auto" dividerColor="primary">
+              <input mdInput formControlName="confirm_password" name="confirm_password" type="password" required
+                     minlength="6"
+                     placeholder="Confirm Password">
+              <span mdPrefix></span>
+              <span mdSuffix></span>
+              <md-error *ngIf="studentSignUpForm.controls['confirm_password'].hasError('required')">
+                Password is required
+              </md-error>
+              <md-error *ngIf="studentSignUpForm.controls['confirm_password'].hasError('minlength')">
+                Password is too short
+              </md-error>
+              <md-error *ngIf="studentSignUpForm.controls['confirm_password'].hasError('mismatch')">
+                Passwords do not match
+              </md-error>
+
+            </md-input-container>
+          </div>
+        </md-card-content>
+        <md-card-actions align="end">
+          <a md-button routerLink="../" class="go-back">Go back</a>
+          <button md-button type="reset" (click)="studentSignUpForm.reset()">Reset</button>
+          <button md-raised-button type="submit"
+                  [disabled]="studentSignUpForm.pristine || studentSignUpForm.invalid">
+            Sign Up
+          </button>
+        </md-card-actions>
+      </form>
+    </md-card>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="form-page mdl-layout__content" *ngIf="showList">
+  <div class="mdl-grid">
+
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" [mode]="loadingMode" [value]="loadingValue" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loadingText}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+    <md-card class="mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <div class="mdl-card__title">
+        <div class="mdl-card__title-text">
+          Submitted Internship Application
+        </div>
+
+        <div class="mdl-card__menu">
+          <button *ngIf="!no_application"
+                  md-raised-button type="button"
+                  (click)="startApplication()">
+            Open Application Form
+          </button>
+        </div>
+      </div>
+      <div class=" table-container">
+        <table class="mdl-data-table mdl-js-data-table">
+          <thead>
+          <tr class="">
+            <th class="day-number"> #</th>
+            <th class="mdl-data-table__cell--non-numeric ">Application Date</th>
+            <th class="mdl-data-table__cell--non-numeric ">Company Applied to</th>
+            <th class="mdl-data-table__cell--non-numeric">Status</th>
+            <th class="mdl-data-table__cell--non-numeric">Reason for reject</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="" *ngFor="let application of student_applications | async">
+            <td>{{ application.id }}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{application.application_date | amDateFormat:'LL' }}</td>
+
+            <td class="mdl-data-table__cell--non-numeric">{{application.company_name }}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <md-chip-list>
+                <md-chip class="pending mat-button" *ngIf="application.application_status == 'pending'"
+                         mdTooltip="Awaiting review, Click to Edit/update"
+                         mdTooltipPosition="above"
+                         (click)="viewForm(application)">
+                  {{application.application_status}}
+                </md-chip>
+                <md-chip class="rejected" *ngIf="application.application_status == 'rejected'"
+                         mdTooltip="Application Rejected"
+                         mdTooltipPosition="above"
+                         (click)="viewForm(application)">
+                  {{application.application_status}}
+                </md-chip>
+                <md-chip class="accepted" *ngIf="application.application_status == 'accepted'"
+                         mdTooltip="Reviewed and Accepted"
+                         mdTooltipPosition="above">
+                  {{application.application_status}}
+                </md-chip>
+              </md-chip-list>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric description-row">
+              <div *ngIf="application.reject_reason" mdTooltip="Reason why this application was rejected"
+                   mdTooltipPosition="above">
+                {{application.reject_reason}}
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!-- <md-paginator #paginator
+                       [length]="[1,2,4,5].length"
+                       [pageIndex]="0"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5, 10, 25, 100]">
+         </md-paginator>-->
+      </div>
+
+    </md-card>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+<!--load application form here-->
+<div *ngIf="!showList">
+    <router-outlet></router-outlet>
+</div>

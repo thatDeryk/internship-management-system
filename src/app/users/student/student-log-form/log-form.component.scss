@@ -1,0 +1,101 @@
+.full-width-input {
+  width: 100%;
+}
+
+.mdl-layout__content{
+  display: flex;
+}
+.log-page{
+  .mdl-grid{
+    padding-top: 60px;
+    min-height: 500px;
+  }
+}
+ .training-form{
+  padding: 0  80px;
+}
+
+.description-input {
+  margin-top: 40px;
+}
+
+.submit-form-btn {
+  float: right;
+
+}
+
+
+.card-overlay{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  /* z-index: 2;*/
+  background-color: rgba(0, 0, 0, 0.52);
+  box-sizing: content-box;
+  align-content: center;
+
+}
+.white-bg{
+  background-color: white;
+
+}
+
+
+.loading-spinner{
+  position: relative;
+  top: 50%;
+  left:50%;
+  right:50%;
+  width: 300px;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+.loading-text{
+  text-align: center;
+  width: 50%;
+}
+
+.loading-card-footer{
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  bottom: 160px;
+  min-height: 20px;
+  height: 20px;
+}
+
+
+
+.start-log-book{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index: 2;
+  background-color: rgba(239, 250, 247, 0.22);
+  box-sizing: content-box;
+  align-content: center;
+
+}
+.start-btn{
+  position: relative;
+  top: 50%;
+  left:50%;
+  right:50%;
+  width: 300px;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}

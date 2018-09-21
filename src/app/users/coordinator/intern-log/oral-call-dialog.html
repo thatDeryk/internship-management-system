@@ -1,0 +1,120 @@
+<!--
+
+dialog sample code in ts
+---
+
+1. Get reference to dialog
+constructor(public dialog: MdDialog) {
+}
+
+2. Open the dialog like this
+
+this.dialogRef = this.dialog.open(CustomDialog, this.config);
+
+(or)
+
+this.dialogRef = this.dialog.open(CustomDialog);
+
+(or)
+
+@ViewChild(TemplateRef) template: TemplateRef<any>; // refers to a html <template> element
+this.dialogRef = this.dialog.open(this.template, this.config);
+
+sample dialog config
+---
+
+config: MdDialogConfig = {
+    disableClose: false,
+    hasBackdrop: true,
+    backdropClass: '',
+    width: '',
+    height: '',
+    position: {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    },
+    data: {
+      message: 'custom message'
+    }
+  }
+
+Receive data in the dialog
+--
+
+export class CustomDialog {
+  constructor(
+    private dialogRef: MdDialogRef<CustomDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
+}
+
+Send result back to dialog parent from dialog
+--
+
+export class CustomDialog {
+  constructor(
+    private dialogRef: MdDialogRef<CustomDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
+
+  sendDataToParent() {
+    this.dialogRef.close(dataForParent);
+  }
+}
+
+
+disable body level scrolling by subscribing to dialog event subscription
+---
+
+dialog.afterOpen.subscribe((ref: MdDialogRef<any>) => {
+  if (!doc.body.classList.contains('no-scroll')) {
+    doc.body.classList.add('no-scroll');
+  }
+});
+
+dialog.afterAllClosed.subscribe(() => {
+  doc.body.classList.remove('no-scroll');
+});
+
+-->
+
+<h1 mdDialogTitle>Notify Student for Oral Exam </h1>
+
+
+<form name="oralForm" [formGroup]="messageForm" (ngSubmit)="submitReason()">
+  <md-dialog-content>
+    <div class="login-form">
+      <md-input-container>
+        <input mdInput
+               formControlName="examDate"
+               [mdDatepicker]="datePickerRef"
+               placeholder=""
+               [min]="minDate"
+               [mdDatepickerFilter]="dateFilter">
+        <button mdSuffix [mdDatepickerToggle]="datePickerRef"></button>
+      </md-input-container>
+      <md-datepicker
+        #datePickerRef
+        [touchUi]="true"
+        [startAt]="startDate"
+        [startView]="'month'"></md-datepicker>
+
+      <md-input-container floatPlaceholder="auto" class="half-input-container">
+        <input mdInput formControlName="examTime" type="time" required
+               placeholder="Exam Time">
+      </md-input-container>
+      <md-input-container floatPlaceholder="auto" class="full-input-container">
+          <textarea mdInput mdTextareaAutosize name="reason" formControlName="message" mdAutosizeMinRows="4" required
+                    placeholder="Message"></textarea>
+        <md-error>
+          Please you need to provide a reason.
+        </md-error>
+      </md-input-container>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions class="dialog-action" [attr.align]="'end'">
+    <button md-button mdDialogClose class="cancel-btn">Cancel</button>
+    <button md-button md-raised-button [disabled]="messageForm.pristine">Submit</button>
+  </md-dialog-actions>
+</form>

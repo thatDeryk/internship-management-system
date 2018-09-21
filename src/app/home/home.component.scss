@@ -1,0 +1,72 @@
+.home-page.mdl-layout__content {
+  display: flex;
+}
+
+.home-page__grid {
+  max-width: 1000px;
+  padding: 40px 0 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+
+}
+
+.options-card {
+  min-height: 300px;
+  padding-bottom: 30px;
+}
+
+.card-img {
+  align-content: center;
+  align-items: center;
+  background-color: transparent;
+  img {
+    padding: 0 0 0 0;
+    display: flex;
+  }
+}
+
+.mdl-components-img {
+  width: 100%;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.mdl-card__media {
+  box-sizing: border-box;
+  background-size: cover;
+  padding: 24px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  /*cursor: pointer;*/
+}
+
+.btn-group {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+
+}

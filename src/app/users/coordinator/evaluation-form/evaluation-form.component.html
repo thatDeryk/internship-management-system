@@ -1,0 +1,156 @@
+<div class="form-page mdl-layout__content">
+  <div class="mdl-grid">
+    
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+        
+        <md-progress-spinner class="loading-spinner" mode="indeterminate" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+      
+      </md-card-footer>
+    
+    </md-card>
+    
+    <md-card class="mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <md-card-header>
+        <md-card-title>Summer Training Evaluation Form</md-card-title>
+      </md-card-header>
+      <form [formGroup]="evaluationForm" (ngSubmit)="_submitEvaluation()">
+        <md-card-content class="form-content">
+          <md-input-container floatPlaceholder="auto" class="full-width-input">
+            <input mdInput type="text" required formControlName="student_number"
+                   placeholder="Student Number">
+          </md-input-container>
+          <md-input-container floatPlaceholder="auto" class="full-width-input">
+            <input mdInput type="text" required formControlName="student_name"
+                   placeholder="Student Fullname">
+          </md-input-container>
+          
+          
+          <table class="mdl-data-table mdl-js-data-table">
+            <thead class="table-head">
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Evaluation Of Report</td>
+              <td class="remark">Good</td>
+              <td class="remark">Fair</td>
+              <td class="remark">Poor</td>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">
+                Evaluate the quality of the report and the compatibility of work done with the logbook
+              </td>
+              <td colspan="3">
+                <md-radio-group formControlName="eval_report" class="radio-group" [align]="'center'">
+                  <md-radio-button class="radio-btn" value="good"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="fair"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="poor"></md-radio-button>
+                </md-radio-group>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+            </tr>
+            </tbody>
+            
+            
+            <thead>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Evaluation Of Work Done</td>
+              <td class="remark">Good</td>
+              <td class="remark">Fair</td>
+              <td class="remark">Poor</td>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">
+                The student has done IT related work or applied IT knowlegde to some work done
+              </td>
+              <td colspan="3">
+                <md-radio-group formControlName="eval_work_done" class="radio-group" [align]="'center'">
+                  <md-radio-button class="radio-btn" value="good"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="fair"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="poor"></md-radio-button>
+                </md-radio-group>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="3"></td>
+            
+            </tr>
+            </tbody>
+            
+            
+            <thead>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Evaluation Of Oral Exam</td>
+              <td>Good</td>
+              <td>Fair</td>
+              <td>Poor</td>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Knowledge of the student</td>
+              <td colspan="3" class="radio-td">
+                <md-radio-group formControlName="student_knowledge" class="radio-group" [align]="'center'">
+                  <md-radio-button class="radio-btn" value="good"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="fair"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="poor"></md-radio-button>
+                </md-radio-group>
+              </td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Answering questions</td>
+              <td colspan="3" class="radio-td">
+                <md-radio-group formControlName="answering_question" class="radio-group" [align]="'center'">
+                  <md-radio-button class="radio-btn" value="good"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="fair"></md-radio-button>
+                  <md-radio-button class="radio-btn" value="poor"></md-radio-button>
+                </md-radio-group>
+              </td>
+              <!-- <td>
+				 <md-radio-group  [align]="'start'">
+				   <md-radio-button value=""></md-radio-button>
+				 </md-radio-group>
+			   </td>
+			   <td>
+				 <md-radio-group  [align]="'start'">
+				   <md-radio-button value=""></md-radio-button>
+				 </md-radio-group>
+			   </td>-->
+            </tr>
+            
+            </tbody>
+          </table>
+          
+          <md-input-container floatPlaceholder="auto" class="full-width-input">
+            <textarea mdInput mdTextareaAutosize name="note"
+                      formControlName="note"
+                      required mdAutosizeMinRows="4"
+                      placeholder="Note"></textarea>
+          </md-input-container>
+          
+          <md-select formControlName="result" placeholder="Overall Recommendation" required>
+            <md-option >....</md-option>
+            <md-option [value]="'satisfactory'">Satisfactory</md-option>
+            <md-option [value]="'unsatisfactory'">Unsatisfactory</md-option>
+          </md-select>
+        </md-card-content>
+        
+        <md-card-actions align="end" class="actions">
+          
+          <button md-raised-button type="submit"
+                  [disabled]="evaluationForm.pristine || evaluationForm.invalid">
+            Submit
+          </button>
+        </md-card-actions>
+      </form>
+    </md-card>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="log-table mdl-layout__content">
+  <div class="mdl-grid">
+    <md-card class="mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col">
+      <md-card-header MdCardHeader class="mat-card-header">
+        <md-card-title class="mat-card-title">ITEC 404</md-card-title>
+        <md-card-subtitle>Internship Log for {{student_name}}</md-card-subtitle>
+        <div class="mdl-card__menu">
+          <button *ngIf="showCompleteBtn" (click)="internComplete()" [disabled]="isInternComplete"
+                  md-raised-button class="intern-complete-btn">
+            {{btn_text}}
+          </button>
+          <md-input-container floatPlaceholder="never" class="search-input">
+            <input mdInput name="search" #searchLogs
+                   placeholder="Search">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+          </md-input-container>
+        </div>
+      </md-card-header>
+      <div class=" example-container">
+        <table class="mdl-data-table mdl-js-data-table">
+          <thead>
+          <tr class="">
+            <th class="day-number">Day #</th>
+            <th class="mdl-data-table__cell--non-numeric ">Log Date</th>
+            <th class="mdl-data-table__cell--non-numeric">Department</th>
+            <th class="mdl-data-table__cell--non-numeric">Description</th>
+            <th class="mdl-data-table__cell--non-numeric">Log Status</th>
+            <th class="mdl-data-table__cell--non-numeric">Decline Reason</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="" *ngFor="let log of student_logs | async; let i = index">
+            <td>{{i + 1}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{log.log_date | amDateFormat:'LL'}}</td>
+            <td class="mdl-data-table__cell--non-numeric department">
+              <div>
+                {{log.log_department}}
+              </div>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric description-row">
+              <div>
+                {{log.log_description}}
+              </div>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric description-row">
+              <md-chip-list>
+                <md-chip class="update" *ngIf="log.log_status == 'updated'">Updated</md-chip>
+                <md-chip class="approved" *ngIf="log.log_status == 'approved'"> Approved</md-chip>
+                <md-chip class="pending" *ngIf="log.log_status == 'pending'"> Pending</md-chip>
+              </md-chip-list>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric description-row">
+              <div *ngIf="log.log_status !== 'approved'">
+                {{log.log_review}}
+              </div>
+            </td>
+            <td>
+              <div *ngIf="log.log_status !== 'approved'">
+                <button md-button class="accept-btn" [disabled]="log.log_status =='approved'"
+                        (click)="acceptLog(log)">
+                  Accept
+                </button>
+                <button md-button class="decline-btn" [disabled]="log.log_status =='declined'"
+                        (click)="declineLog(log)">
+                  Decline
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+        <md-paginator #paginator
+                      [length]="logLength"
+                      [pageIndex]="pageIndex"
+                      [pageSize]="pageSize"
+                      (page)="pageChange($event)"
+                      [pageSizeOptions]="[20, 40, 50, 100]">
+        </md-paginator>
+      </div>
+    </md-card>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

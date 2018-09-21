@@ -1,0 +1,157 @@
+<div class="form-page mdl-layout__content">
+  <div class="mdl-grid">
+
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" mode="indeterminate" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+
+    <div class="form-card mdl-shadow--4dp mdl-card  mdl-cell--12-col" *ngIf="!showLoading">
+      <div class="mdl-card__title">
+        <h3 class="mdl-card__title-text">ITEC 400 Summer Training Confirmation Form</h3>
+      </div>
+      <br>
+      <br>
+      <div class="form">
+        <form name="training-form" [formGroup]="confirmationForm" (ngSubmit)="onSubmit()">
+          <!-- <div class="establishment-title mdl-card__title">
+             <h5>Establishment Information:</h5>
+           </div>-->
+          <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+            <input mdInput type="text" name="company_name" required formControlName="company_name"
+                   (blur)="checkStudentName($event)"
+                   placeholder="Company Name">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+
+            </md-hint>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" class="full-width-input">
+              <textarea mdInput mdTextareaAutosize name="address" required [mdAutosizeMinRows]="4"
+                        formControlName="company_address"
+                        placeholder="Company Address"></textarea>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+            <input mdInput type="tel" name="tel" required formControlName="company_phone"
+                   placeholder="Company Tel.">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+            </md-hint>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+            <input mdInput type="text" name="name" required formControlName="student_name"
+                   (blur)="checkStudentName($event)"
+                   placeholder="Full Name of Student">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-error *ngIf="confirmationForm.controls['student_name'].hasError('required')">
+              Please enter the student full name
+            </md-error>
+            <md-error *ngIf="confirmationForm.controls['student_name'].hasError('isStudent')">
+             A student with the name exists for this company.
+            </md-error>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+            <input mdInput type="text" name="contact_person" required formControlName="contact_person"
+                   placeholder="Contact Person">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+
+            </md-hint>
+          </md-input-container>
+
+          <div class="start-end-date mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col">
+              <md-input-container floatPlaceholder="auto">
+                <input mdInput formControlName="start_date"
+                       [mdDatepicker]="startDate"
+                       placeholder="Start Date">
+                <button mdSuffix [mdDatepickerToggle]="startDate"></button>
+                <md-error *ngIf="confirmationForm.controls['start_date'].hasError('isSameOrBefore')">
+                  Start Date cant be the same as end date or after end date
+                </md-error>
+                <md-error *ngIf="confirmationForm.controls['start_date'].hasError('required')">
+                  Start date is required
+                </md-error>
+              </md-input-container>
+              <md-datepicker
+                #startDate
+                [touchUi]="true"
+                [startView]="'month'">
+              </md-datepicker>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+              <md-input-container floatPlaceholder="auto">
+                <input mdInput formControlName="end_date"
+                       [mdDatepicker]="endDate"
+                       placeholder="End Date">
+                <button mdSuffix [mdDatepickerToggle]="endDate"></button>
+                <md-error *ngIf="confirmationForm.controls['end_date'].hasError('isSameOrBefore')">
+                  End Date cant be before start date or same as start date
+                </md-error>
+                <md-error *ngIf="confirmationForm.controls['end_date'].hasError('required')">
+                  End date is required
+                </md-error>
+
+              </md-input-container>
+              <md-datepicker
+                #endDate
+                [touchUi]="true"
+                [startView]="'month'">
+              </md-datepicker>
+            </div>
+          </div>
+
+
+          <div class="establishment-title mdl-card__title">
+            <h5> The work to be done by the student(tick all that apply)
+            </h5>
+          </div>
+
+          <div class="work-check-box-group mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col form-control" *ngFor="let work of work_to_be_done">
+              <md-checkbox class="checkbox" (change)="checkedValue(work.name, $event)"
+                           [value]="work" name="dv" align="start" [indeterminate]="false"
+                           color="primary">
+                {{work.name}}
+              </md-checkbox>
+              <!-- formControlName="formControlName"-->
+            </div>
+          </div>
+          <md-input-container floatPlaceholder="auto" class="full-width-input" style="margin-bottom: 100px">
+              <textarea mdInput mdTextareaAutosize name="others" formControlName="others" [mdAutosizeMinRows]="4"
+                        placeholder="Others:"></textarea>
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+              Enter other works, separated by comma (eg: Penetration Testing, Software debugging)
+            </md-hint>
+          </md-input-container>
+          <div class="mdl-card__actions">
+
+            <button class="submit-form-btn" type="submit"
+                    [disabled]="confirmationForm.pristine || confirmationForm.invalid" md-raised-button>Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

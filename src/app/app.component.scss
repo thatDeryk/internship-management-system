@@ -1,0 +1,76 @@
+
+header.app-header {
+  overflow: visible;
+  background-color: #003876 !important;
+  color: #ffffff!important;
+}
+
+.app-logo{
+  max-width:400px;
+}
+
+.app-title {
+  color: #ffffff;
+  /*position: relative;
+  height:100px;
+  background-repeat: no-repeat;
+  width: 100%;*/
+}
+
+.mdl-layout__header-row {
+  padding-left: 35px;
+  padding-right: 35px;
+
+  .mdl-navigation__link{
+    line-height:35px;
+    color: white;
+  }
+}
+
+.ap-navigation-container {
+  direction: rtl;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  width: 500px;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-search-btn {
+  min-width: 10px;
+  width: 10px;
+  padding-left: 10px;
+}
+
+.app-navigation {
+  direction: ltr;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+ /* width: 800px;*/
+}
+
+
+
+.side-nav-list-items {
+  .mat-list-item{
+    .mat-list-item-content{
+      padding: 0 0 0 16px!important;
+      .mat-button{
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+      }
+    }
+  }
+}
+@media screen and(max-width: 1024px) {
+  .mdl-layout__header{
+    display: block;
+  }
+}
+

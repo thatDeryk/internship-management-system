@@ -1,0 +1,85 @@
+<div class="log-page mdl-layout__content">
+  <div class="mdl-grid">
+
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" [mode]="spinner_mode" [value]="spinner_value" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+
+    <div class="log-card mdl-shadow--4dp mdl-card mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <div class="start-log-book" *ngIf="!logBookStarted">
+        <button class="start-btn" md-raised-button (click)="startLog()">
+          {{start_btn_text}}
+        </button>
+      </div>
+
+
+      <div class="form" *ngIf="logBookStarted">
+        <div class="establishment-title mdl-card__title">
+          <h5>Log Book:</h5>
+        </div>
+        <form [formGroup]="logBookForm" name="training-form" class="training-form"
+              (ngSubmit)="onSubmitLog()">
+          <div class="form-group">
+            <md-input-container>
+              <input mdInput
+                     formControlName="logDate"
+                     [mdDatepicker]="datePickerRef"
+                     placeholder="Log Date"
+                     [min]="minDate"
+                     [max]="maxDate"
+                     (click)="checkDate()"
+                     required
+                     [mdDatepickerFilter]="dateFilter">
+              <button mdSuffix [mdDatepickerToggle]="datePickerRef"></button>
+              <md-error *ngIf="logBookForm.controls['logDate'].hasError('isUsed')">
+               Cant use that date.
+              </md-error>
+            </md-input-container>
+            <md-datepicker
+              #datePickerRef
+              [touchUi]="true"
+              [startAt]="startDate"
+              [startView]="'month'"></md-datepicker>
+
+            <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+              <input mdInput formControlName="logDepartment" type="text" name="field" required
+                     placeholder="Department">
+              <span mdPrefix></span>
+              <span mdSuffix></span>
+              <md-hint align="start">
+
+              </md-hint>
+            </md-input-container>
+
+            <md-input-container floatPlaceholder="auto" class="full-width-input">
+              <textarea mdInput mdTextareaAutosize formControlName="logDescription"
+                        name="address" required
+                        [mdAutosizeMinRows]="4"
+                        placeholder="Description"></textarea>
+            </md-input-container>
+
+
+            <div class="mdl-card__actions">
+
+              <button class="submit-form-btn" type="submit"
+                      [disabled]="logBookForm.pristine || logBookForm.invalid"
+                      md-raised-button>
+                Submit log
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+.mdl-layout__content{
+  display: flex;
+}
+
+.half-width-input {
+  width: 50%;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.mdl-grid{
+  max-width: 800px;
+  width: 500px;
+}
+
+.log-card{
+  padding: 40px;
+}
+
+
+.card-overlay {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* z-index: 2;*/
+  box-sizing: content-box;
+  align-content: center;
+  
+}
+
+.loading-spinner {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  width: 300px;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.loading-text {
+  text-align: center;
+  width: 100%;
+}
+
+.loading-card-footer {
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  bottom: 5px;
+  min-height: 20px;
+  height: 20px;
+}

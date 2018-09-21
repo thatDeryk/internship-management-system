@@ -1,0 +1,92 @@
+<div class="log-table mdl-layout__content">
+  <div class="mdl-grid">
+
+    <a *ngIf="!showLoading" md-icon-button title="Go Back" routerLink="../../interns">
+      <md-icon class="md-48">keyboard_backspace</md-icon>
+      Go Back
+    </a>
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col"
+             *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" mode="indeterminate" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+
+
+    <md-card class="mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <md-card-header MdCardHeader class="mat-card-header">
+        <md-card-title class="mat-card-title">ITEC 404</md-card-title>
+        <md-card-subtitle>Internship Log for {{student_name}}</md-card-subtitle>
+        <md-card-subtitle>
+          Internship Status:
+          <md-basic-chip>{{btn_text}}</md-basic-chip>
+        </md-card-subtitle>
+        <div class="mdl-card__menu">
+          <!--   <button *ngIf="showCompleteBtn" [disabled]="isInternComplete"
+                     md-button class="intern-complete-btn">
+               {{btn_text}}
+             </button>
+   -->
+
+          <!--isInternComplete && -->
+          <button *ngIf="isMessageSent" md-raised-button
+                  (click)="callForOralExam(student_number)">Notify Student for Oral Exam
+          </button>
+          <md-input-container floatPlaceholder="never" dividerColor="primary" class="search-input">
+            <input mdInput name="search" #search
+                   placeholder="Search">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+          </md-input-container>
+        </div>
+      </md-card-header>
+      <div class=" example-container">
+        <table class="mdl-data-table">
+          <thead>
+          <tr class="">
+            <th class="mdl-data-table__cell--non-numeric ">Log Date</th>
+            <th class="mdl-data-table__cell--non-numeric">Department</th>
+            <th class="mdl-data-table__cell--non-numeric">Description</th>
+            <!-- <th class="mdl-data-table__cell&#45;&#45;non-numeric">Log Status</th>-->
+            <!-- <th class="mdl-data-table__cell&#45;&#45;non-numeric">Decline Reason</th>-->
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="" *ngFor="let log of student_logs | async">
+            <td class="mdl-data-table__cell--non-numeric">{{log.log_date | amDateFormat:'LL'}}</td>
+            <td class="mdl-data-table__cell--non-numeric department">
+              <div>
+                {{log.log_department}}
+              </div>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric description-row">
+              <div>
+                {{log.log_description}}
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <md-paginator #paginator
+                      [length]="total_page"
+                      [pageIndex]="pageIndex"
+                      [pageSize]="pageSize"
+                      (page)="pageChange($event)"
+                      [pageSizeOptions]="[10,20, 30, 50, 100]">
+        </md-paginator>
+      </div>
+    </md-card>
+
+  </div>
+</div>
+
+<router-outlet></router-outlet>

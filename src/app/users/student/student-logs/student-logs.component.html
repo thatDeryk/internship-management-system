@@ -1,0 +1,160 @@
+<div class="log-table mdl-layout__content">
+  <div class="mdl-grid" *ngIf="!showForm">
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" [mode]="spinner_mode" [value]="spinner_value" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+
+    <md-card class="mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <md-card-header MdCardHeader class="mat-card-header">
+        <md-card-title class="mat-card-title">ITEC 404</md-card-title>
+        <md-card-subtitle>Internship Log</md-card-subtitle>
+        <div class="mdl-card__menu">
+          <button *ngIf="showCompleteBtn" [disabled]="isInternComplete"
+                  md-raised-button class="intern-complete-btn">
+            Internship Complete
+          </button>
+          <md-input-container floatPlaceholder="never" class="search-input">
+            <input mdInput #search name="search"
+                   placeholder="Search">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+          </md-input-container>
+        </div>
+      </md-card-header>
+      <div class=" example-container">
+        <table class="mdl-data-table mdl-js-data-table">
+          <thead>
+          <tr class="">
+            <th class="day-number">Day #</th>
+            <th class="mdl-data-table__cell--non-numeric ">Log Date</th>
+            <th class="mdl-data-table__cell--non-numeric">Log Department</th>
+            <th class="mdl-data-table__cell--non-numeric">Log Description</th>
+            <th class="mdl-data-table__cell--non-numeric">Log Status</th>
+            <th class="mdl-data-table__cell--non-numeric">Reason for decline</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="" *ngFor="let log of studentLogs | async ; let i = index">
+            <td>{{log.log_day}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{log.log_date | amDateFormat:'LL'}}</td>
+            <td class="mdl-data-table__cell--non-numeric department">
+              <div>
+                {{log.log_department}}
+              </div>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric description-row">
+              <div>
+                {{log.log_description}}
+              </div>
+            </td>
+            <td>
+              <md-chip-list>
+                <md-chip (click)="reviewAndUpdateDeniedLog(log)"
+                         class="warn declined-chip mat-button" *ngIf="log.log_status ==='declined'"
+                         title="update this log"
+                         color="warn">
+                  {{log.log_status}}
+                </md-chip>
+
+                <md-chip (click)="updateLog(log)" class="warn mat-button" mdTooltip="Yet to be reviewed."
+                         mdTooltipPosition="above"
+                         *ngIf="log.log_status ==='pending' || log.log_status === 'updated'" color="warn">
+                  {{log.log_status}}
+                </md-chip>
+                <md-chip class="success" *ngIf="log.log_status ==='approved'"
+                         color="warn" mdTooltip="Reviewed and Accepted"
+                         mdTooltipPosition="above">
+                  {{log.log_status}}
+                </md-chip>
+              </md-chip-list>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric department">
+              <div *ngIf="log.log_status ==='declined' || log.log_status === 'updated'">{{log.log_review}}</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <md-paginator #paginator
+                      [length]="logLength"
+                      [pageIndex]="pageIndex"
+                      [pageSize]="pageSize"
+                      (page)="pageChange($event)"
+                      [pageSizeOptions]="[20, 40, 60, 100]">
+        </md-paginator>
+      </div>
+    </md-card>
+  </div>
+
+  <div class="mat-grid mdl-grid" *ngIf="showForm">
+    <md-card class="log-card mat-elevation-z8 mat-card mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <md-card-header MdCardHeader class="mat-card-header" *ngIf="studentLogs['logs']">
+        <md-card-title class="mat-card-title">{{formTitle}}</md-card-title>
+      </md-card-header>
+
+
+      <div class="form">
+        <div class="establishment-title mdl-card__title">
+          <h5>Log Book Form</h5>
+        </div>
+        <form [formGroup]="logBookForm" name="training-form" class="training-form"
+              (ngSubmit)="onSubmitUpdatedLog()">
+          <div class="form-group">
+            <md-input-container>
+              <input mdInput
+                     formControlName="logDate"
+                     [mdDatepicker]="datePickerRef"
+                     placeholder="Log Date"
+                     [min]="minDate"
+                     [max]="maxDate"
+                     required>
+              <button mdSuffix [mdDatepickerToggle]="datePickerRef"></button>
+            </md-input-container>
+            <md-datepicker
+              #datePickerRef
+              [touchUi]="true"
+              [startAt]="startDate"
+              [startView]="'month'"></md-datepicker>
+            <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+              <input mdInput formControlName="logDepartment" type="text" name="field" required
+                     placeholder="Department">
+              <span mdPrefix></span>
+              <span mdSuffix></span>
+              <md-hint align="start">
+
+              </md-hint>
+            </md-input-container>
+
+            <md-input-container floatPlaceholder="auto" class="full-width-input">
+              <textarea mdInput mdTextareaAutosize formControlName="logDescription"
+                        name="address" required
+                        [mdAutosizeMinRows]="4"
+                        placeholder="Description"></textarea>
+            </md-input-container>
+
+
+            <div class="mdl-card__actions">
+
+              <button md-button (click)="showForm = false;">Back</button>
+              <button class="submit-form-btn" type="submit"
+                      [disabled]="logBookForm.pristine || logBookForm.invalid"
+                      md-raised-button>
+                Submit log
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </md-card>
+  </div>
+</div>

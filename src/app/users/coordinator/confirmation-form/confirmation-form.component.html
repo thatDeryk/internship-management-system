@@ -1,0 +1,142 @@
+<div class="form-page mdl-layout__content">
+  <div class="mdl-grid">
+
+    <a *ngIf="!showLoading" md-icon-button title="Go Back" routerLink="../../interns">
+      <md-icon class="md-48">keyboard_backspace</md-icon>
+      Go Back
+    </a>
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" mode="indeterminate" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+
+    <div class="form-card mdl-shadow--4dp mdl-card  mdl-cell--12-col" *ngIf="!showLoading">
+      <div class="mdl-card__title">
+        <h3 class="mdl-card__title-text">ITEC 400 Summer Training Confirmation Form</h3>
+      </div>
+      <br>
+      <br>
+      <div class="form">
+        <form name="training-form" [formGroup]="confirmationForm">
+          <!-- <div class="establishment-title mdl-card__title">
+             <h5>Establishment Information:</h5>
+           </div>-->
+          <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+            <input mdInput type="text" name="company_name"  formControlName="company_name"
+                   placeholder="Company Name">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+
+            </md-hint>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" class="full-width-input">
+              <textarea mdInput mdTextareaAutosize name="address" required [mdAutosizeMinRows]="4"
+                        formControlName="company_address"
+                        placeholder="Company Address"></textarea>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+            <input mdInput type="tel" name="tel" required formControlName="company_phone"
+                   placeholder="Company Tel.">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+            </md-hint>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto"  class="full-width-input">
+            <input mdInput type="text" name="name" required
+                   formControlName="student_name" data-mdl-disabled="true" readonly
+                   placeholder="Full Name of Student">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+          </md-input-container>
+
+          <md-input-container floatPlaceholder="auto" dividerColor="primary" class="full-width-input">
+            <input mdInput type="text" name="contact_person" required formControlName="contact_person"
+                   readonly
+                   placeholder="Contact Person">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+
+            </md-hint>
+          </md-input-container>
+
+          <div class="start-end-date mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col">
+              <md-input-container floatPlaceholder="auto">
+                <input mdInput formControlName="start_date"
+                       [mdDatepicker]="startDate"
+                       placeholder="Start Date">
+                <button mdSuffix disabled [mdDatepickerToggle]="startDate"></button>
+              </md-input-container>
+              <md-datepicker
+                #startDate
+                [touchUi]="true"
+                [startView]="'month'">
+              </md-datepicker>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+              <md-input-container floatPlaceholder="auto">
+                <input mdInput formControlName="end_date"
+                       [mdDatepicker]="endDate"
+                       placeholder="End Date">
+                <button mdSuffix disabled [mdDatepickerToggle]="endDate"></button>
+              </md-input-container>
+              <md-datepicker
+                #endDate disabled="true"
+                [touchUi]="true"
+                [startView]="'month'">
+              </md-datepicker>
+            </div>
+          </div>
+
+
+          <div class="establishment-title mdl-card__title">
+            <h5> The work to be done by the student
+            </h5>
+          </div>
+
+          <div class="work-check-box-group mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col form-control" *ngFor="let work of work_to_be_done">
+              <md-checkbox class="checkbox" checked="true" aria-readonly="true" readonly disabled="true"
+                           [value]="work" name="dv" align="start" [indeterminate]="false"
+                           color="primary">
+                {{work.name}}
+              </md-checkbox>
+              <!-- formControlName="formControlName"-->
+            </div>
+          </div>
+          <md-input-container floatPlaceholder="auto" class="full-width-input" style="margin-bottom: 100px">
+              <textarea mdInput mdTextareaAutosize name="others" formControlName="others" [mdAutosizeMinRows]="4"
+                        placeholder="Others:"></textarea>
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+            <md-hint align="start">
+              Enter other works, separated by comma (eg: Penetration Testing, Software debugging)
+            </md-hint>
+          </md-input-container>
+          <div class="mdl-card__actions">
+
+            <!--<button class="submit-form-btn" type="button"
+                     md-raised-button>
+              Print Form
+            </button>-->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

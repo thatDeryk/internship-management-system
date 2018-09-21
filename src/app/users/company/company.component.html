@@ -1,0 +1,39 @@
+<div class="coordinator-root-page mdl-layout mdl-js-layout">
+
+  <md-sidenav-container class="sidenav-container">
+    <md-sidenav #sidenav mode="side" opened="true" class="mdl-shadow--4dp" style="">
+      <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+         <md-icon>play</md-icon>
+       </button>-->
+      <div class="side-nav-list">
+        <div class="side-nav-list-items mat-list" role="list">
+          <div class="mat-list-item" role="listitem">
+            <div routerLinkActive="active" class="mat-list-item-content">
+              <a [routerLink]="['home']"
+                 md-button class="nav-btn">Home</a>
+            </div>
+          </div>
+          <div class="mat-list-item" role="listitem">
+            <div routerLinkActive="active" class="mat-list-item-content">
+              <a [routerLink]="['prospective-interns']"
+                 md-button class="nav-btn">Applications</a>
+            </div>
+          </div>
+          <div class="mat-list-item" role="listitem">
+            <div routerLinkActive="active" class="mat-list-item-content">
+              <a [routerLink]="['interns']"
+                 md-button class="nav-btn">Interns</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </md-sidenav>
+    <!--<button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+      <md-icon>add</md-icon>
+    </button>-->
+    <div class="example-scrolling-content">
+      <router-outlet></router-outlet>
+    </div>
+  </md-sidenav-container>
+</div>

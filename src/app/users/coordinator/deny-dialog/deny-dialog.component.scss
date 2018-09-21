@@ -1,0 +1,23 @@
+.full-input-container{
+  width: 100%;
+}
+
+.dialog-action{
+  align-items: right;
+  align-content: flex-end;
+}
+.accept-btn{
+  background-color: #16d386;
+}
+.decline-btn{
+  background-color: #ff5461;
+  color: white;
+}
+
+.cancel-btn{
+  margin-right: 15px;
+}
+
+.mat-dialog-container{
+  height:50vh;
+}

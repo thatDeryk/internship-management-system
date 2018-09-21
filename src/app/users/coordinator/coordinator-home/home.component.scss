@@ -1,0 +1,40 @@
+.mdl-layout__content {
+  display: flex;
+}
+
+.mdl-grid {
+  width: 100%;
+  max-width: 99%;
+  padding-top: 15px;
+}
+
+.instruction-card {
+  .mdl-card__title {
+    border-bottom: 1px black solid;
+  }
+}
+
+.notification-card {
+  max-height: 400px;
+}
+
+.notifaction-content {
+  height: 300px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.date-line {
+  font-size: 12px;
+  width: 160px;
+  z-index: 22;
+  margin-top: -25px;
+}
+
+p.step-item{
+  white-space:normal!important;
+}
+
+.list-step{
+  margin-bottom: 35px!important;
+}

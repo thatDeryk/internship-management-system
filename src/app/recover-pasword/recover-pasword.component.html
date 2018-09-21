@@ -1,0 +1,55 @@
+<div class="login-page mdl-layout__content">
+  <div class="mdl-grid">
+
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" mode="indeterminate" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+    <div class="login-card mdl-shadow--4dp mdl-card mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <div class="mdl-typography--text-center mdl-typography--subhead">
+        <h3>Recover Password</h3>
+      </div>
+      <div *ngIf="errorMessage" class="mdl-typography--text-center mdl-typography--error errorMessage-span">
+        <span class="mat-input-error">{{errorMessage}}</span>
+      </div>
+      <div *ngIf="successMessage" class="mdl-typography--text-center mdl-typography--error errorMessage-span">
+        <span class="mat-input-info">{{successMessage}}</span>
+      </div>
+      <div class="login-form">
+        <form class="form-login" [formGroup]="recoverForm" (ngSubmit)="onSubmit()">
+          <md-input-container floatPlaceholder="auto" class="input-full-width">
+            <input mdInput name="email" formControlName="email" type="email"
+                   required pattern email
+                   placeholder="Email">
+            <md-error *ngIf="recoverForm.controls['email'].hasError('pattern')">
+              Please enter a <strong>valid email</strong> address
+            </md-error>
+            <md-error *ngIf="recoverForm.controls['email'].hasError('required')">
+              Email is <strong>required</strong>
+            </md-error>
+          </md-input-container>
+          <div class="mdl-card__actions">
+            <div class="btn-group">
+              <a class="go-back-btn" md-button routerLink="/" title="Go Back">
+                <!-- <md-icon class="md-20">arrow_back</md-icon>-->
+                Go Back
+              </a>
+              <button class="login-btn" md-raised-button [disabled]="recoverForm.pristine || recoverForm.invalid"
+                      type="submit">Recover
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

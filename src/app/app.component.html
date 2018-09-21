@@ -1,0 +1,31 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<header class="app-header mdl-layout__header">
+  <div class="mdl-layout__header-row">
+    <!-- Title -->
+    <img src="../assets/emu-logo-headingwhite-en%20-%20Copy.png" class="app-logo mdl-layout-icon">
+    <span style="margin-left: 25px" class="app-title mdl-layout-title"
+          routerLink="/"></span>
+    <!-- Add spacer, to align navigation to the right -->
+    <div class="mdl-layout-spacer"></div>
+    <!-- Navigation. We hide it in small screens. -->
+    <div class="app-navigation-container">
+      <nav class="app-navigation mdl-navigation mdl-layout--large-screen-only ">
+        <a class=" mdl-button mdl-navigation__link " *ngIf="isLoggedIn" (click)="userProfile()">
+          Profile
+        </a>
+        <a class=" mdl-button mdl-navigation__link" (click)="gotoHelp()">
+          Help
+        </a>
+        <a class="mdl-button mdl-navigation__link" *ngIf="isLoggedIn" (click)="logout()">
+          Logout
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+<router-outlet title="app"></router-outlet>
+
+

@@ -1,0 +1,115 @@
+.full-width-input {
+  width: 100%;
+}
+
+.form-card {
+  padding: 0;
+  .form {
+    padding: 0 50px 50px;
+  }
+}
+
+.description-input {
+  margin-top: 40px;
+}
+
+.submit-form-btn {
+  float: right;
+  width: 100px;
+}
+
+.form-page.mdl-layout__content {
+  display: flex;
+}
+
+.mdl-grid {
+  max-width: 800px;
+  padding-top: 60px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 200px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.work-check-box-group.mdl-grid {
+  margin-bottom: 50px;
+  padding-top: 15px;
+  max-width: inherit;
+}
+
+.start-end-date.mdl-grid {
+  margin-bottom: 10px;
+  padding-top: 15px;
+  max-width: inherit;
+  padding-left: 0px;
+  padding-right: 0px;
+  .mdl-cell:first-child {
+    margin-left: 0px;
+    margin-right: 24px;
+  }
+  .mdl-cell:nth-child(2) {
+    margin-right: 0;
+  }
+  md-input-container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+div.mat-checkbox-inner-container {
+  margin-top: 5px;
+}
+
+
+
+.card-overlay{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  /* z-index: 2;*/
+  background-color: rgba(0, 0, 0, 0.52);
+  box-sizing: content-box;
+  align-content: center;
+
+}
+.white-bg{
+  background-color: white;
+
+}
+
+
+.loading-spinner{
+  position: relative;
+  top: 50%;
+  left:50%;
+  right:50%;
+  width: 300px;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+.loading-text{
+  text-align: center;
+  width: 100%;
+}
+
+.loading-card-footer{
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  bottom: 5px;
+  min-height: 20px;
+  height: 20px;
+}
+

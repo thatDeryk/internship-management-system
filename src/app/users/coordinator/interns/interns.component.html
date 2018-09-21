@@ -1,0 +1,86 @@
+<div class="log-table mdl-layout__content" *ngIf="!isLogDetail">
+  <div class="mdl-grid">
+    <md-card class="mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col">
+      <md-card-header MdCardHeader class="mat-card-header">
+        <md-card-title class="mat-card-title">ITEC 404 Interns</md-card-title>
+        <md-card-subtitle>Internship Students</md-card-subtitle>
+        <div class="mdl-card__menu">
+          <md-input-container floatPlaceholder="never" class="search-input">
+            <input mdInput #search name="search"
+                   placeholder="Search">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+          </md-input-container>
+        </div>
+      </md-card-header>
+      <div class=" table-container">
+        <table class="mdl-data-table mdl-js-data-table">
+          <thead>
+          <tr class="">
+            <th>#</th>
+            <th class="mdl-data-table__cell--non-numeric">Student Number</th>
+            <th class="mdl-data-table__cell--non-numeric">Student FullName</th>
+            <th class="mdl-data-table__cell--non-numeric">Company Of Intern</th>
+            <th class="mdl-data-table__cell--non-numeric">Internship Status</th>
+            <th class="mdl-data-table__cell--non-numeric"></th>
+            <th class="mdl-data-table__cell--non-numeric"></th>
+            <th class="mdl-data-table__cell--non-numeric"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="" *ngFor="let intern of interns | async; let i = index">
+            <td>{{1}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{intern.student_number}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{intern.student_name}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{intern.company_name}}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <md-chip-list>
+                <md-chip *ngIf="intern.internship_status === 'complete'">
+                  Completed
+                </md-chip>
+                <md-chip *ngIf="intern.internship_status === 'not complete'">
+                  Not Completed
+                </md-chip>
+              </md-chip-list>
+            </td>
+            <td>
+              <button *ngIf="intern.internship_status === 'complete'" md-raised-button
+                      (click)="viewStudentLog(intern)">View Log
+              </button>
+
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+
+              <button md-raised-button (click)="viewForm(intern)">Company Confirmation Form</button>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <div *ngIf="intern.internship_status === 'complete'">
+                <button *ngIf="!intern.evaluation" class="evaluate-intern" md-raised-button
+                        (click)="evaluateIntern(intern)">
+                  Evaluate Intern
+                </button>
+                <md-chip-list *ngIf="intern.evaluation">
+                  <md-chip>
+                    Student Evaluated
+                  </md-chip>
+                </md-chip-list>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+        <md-paginator #paginator
+                      [length]="internsLength"
+                      [pageIndex]="pageIndex"
+                      [pageSize]="pageSize"
+                      (page)="pageChange($event)"
+                      [pageSizeOptions]="[20, 40, 60, 80, 100]">
+        </md-paginator>
+      </div>
+    </md-card>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

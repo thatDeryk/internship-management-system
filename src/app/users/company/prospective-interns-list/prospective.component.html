@@ -1,0 +1,58 @@
+<div class="log-table mdl-layout__content" *ngIf="!isConfirmationForm">
+  <div class="mdl-grid">
+    <md-card class="mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col">
+      <md-card-header MdCardHeader class="mat-card-header">
+        <md-card-title class="mat-card-title">Prospective Interns</md-card-title>
+        <md-card-subtitle>Internship Students</md-card-subtitle>
+        <div class="mdl-card__menu">
+          <md-input-container floatPlaceholder="never" dividerColor="primary" class="search-input">
+            <input mdInput name="search" type="search"
+                   placeholder="Search">
+            <span mdPrefix></span>
+            <span mdSuffix></span>
+          </md-input-container>
+        </div>
+      </md-card-header>
+      <div class="table-container">
+        <table class="mdl-data-table mdl-js-data-table">
+          <thead>
+          <tr class="">
+            <th>#</th>
+            <th>Student Number</th>
+            <th class="mdl-data-table__cell--non-numeric">Student FullName</th>
+            <th class="mdl-data-table__cell--non-numeric">Intern's Work description</th>
+            <th class="mdl-data-table__cell--non-numeric"></th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr class="" *ngFor="let intern of prospectiveInterns | async"  >
+              <td>{{intern.id}}</td>
+              <td>{{intern.student_number}}</td>
+              <td class="mdl-data-table__cell--non-numeric">{{intern.student_first_name + ' ' +
+                intern.student_last_name}}
+              </td>
+              <td class="mdl-data-table__cell--non-numeric">
+                <div class="description-row">
+                  {{intern.work_description}}
+                </div>
+              </td>
+              <td class="mdl-data-table__cell--non-numeric">
+                <button md-raised-button (click)="fillConfirmationForm(intern)">Fill Confirmation Form
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <md-paginator #paginator
+                      [length]="[1,2,4,5].length"
+                      [pageIndex]="0"
+                      [pageSize]="10"
+                      [pageSizeOptions]="[5, 10, 25, 100]">
+        </md-paginator>
+      </div>
+    </md-card>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

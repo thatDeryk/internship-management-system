@@ -1,0 +1,54 @@
+<div class="coordinator-root-page mdl-layout mdl-js-layout">
+
+  <md-sidenav-container class="sidenav-container">
+    <md-sidenav #sidenav mode="side" opened="true" class="mdl-shadow--4dp" style="">
+      <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+         <md-icon>play</md-icon>
+       </button>-->
+<!--      <div class="side-nav-list">
+        <div class="side-nav-list-items mat-list" role="list">
+          <div class="mat-list-item" role="listitem">
+            <div class="mat-list-item-content">
+
+            </div>
+          </div>
+          <div class="mat-list-item" role="listitem">
+            <div class="mat-list-item-content">
+
+            </div>
+          </div>
+          <div class="mat-list-item" role="listitem">
+            <div class="mat-list-item-content">
+
+            </div>
+          </div>
+        </div>
+
+      </div>-->
+      <div class="side-nav-list">
+        <md-list class="side-nav-list-items">
+          <md-list-item >
+            <a [routerLink]="['home']" routerLinkActive="active"
+               md-button class="nav-btn">Home</a>
+          </md-list-item>
+          <md-list-item >
+            <!-- [queryParams]="{user:'user'}" fragment="{{'anchor'}}"-->
+            <a [routerLink]="['applications']" routerLinkActive="active"
+               md-button class="nav-btn">Applications</a>
+          </md-list-item>
+          <md-list-item >
+            <!-- [queryParams]="{user:'user'}" fragment="{{'anchor'}}"-->
+            <a routerLink="interns" routerLinkActive="active"
+               md-button class="nav-btn">Interns</a>
+          </md-list-item>
+        </md-list>
+      </div>
+    </md-sidenav>
+    <!--<button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+      <md-icon>add</md-icon>
+    </button>-->
+    <div class="example-scrolling-content">
+      <router-outlet></router-outlet>
+    </div>
+  </md-sidenav-container>
+</div>

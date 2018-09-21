@@ -1,0 +1,100 @@
+<div class="log-page mdl-layout__content">
+  <div class="mdl-grid">
+
+
+    <md-card class="loading-card mat-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="showLoading">
+      <md-card-content class="white-bg card-overlay">
+
+        <md-progress-spinner class="loading-spinner" [mode]="spinner_mode" [value]="spinner_value" color="primary"
+                             [strokeWidth]="10"></md-progress-spinner>
+      </md-card-content>
+      <md-card-footer class="loading-card-footer">
+        <div class="loading-text"> {{loading_text}}</div>
+
+      </md-card-footer>
+
+    </md-card>
+
+    <md-card class="log-card mat-elevation-z8 mdl-cell mdl-cell--12-col" *ngIf="!showLoading">
+      <md-card-title-group>
+        <md-card-title>Company Profile</md-card-title>
+        <md-card-subtitle>Change password</md-card-subtitle>
+      </md-card-title-group>
+      <form [formGroup]="companyProfile" (ngSubmit)="onSubmit()">
+        <md-card-content>
+          <div class="mdl-typography--text-center mdl-typography--error errorMessage-span" *ngIf="errorMessage">
+            <span class="mat-input-error">{{errorMessage}}</span>
+          </div>
+
+          <table class="full-width-input password-table">
+            <tr>
+              <td>
+                <md-input-container floatPlaceholder="auto" class="full-width-input">
+                  <input mdInput formControlName="email" name="email" type="email" email="true" required pattern
+                         placeholder="Email Address">
+                  <span mdPrefix></span>
+                  <span mdSuffix></span>
+                </md-input-container>
+              </td>
+            </tr>
+          </table>
+
+
+          <div class="change-password-section">
+            <br>
+            <md-card-subtitle>Change Password Below</md-card-subtitle>
+
+            <md-divider md-inset></md-divider>
+
+            <table class="full-width-input password-table">
+              <tr>
+                <td>
+                  <md-input-container floatPlaceholder="auto" class="full-width-input">
+                    <input mdInput formControlName="password" name="password" type="password" required minlength="6"
+                           placeholder="Current Password">
+                    <span mdPrefix></span>
+                    <span mdSuffix></span>
+                    <md-error *ngIf="companyProfile.controls['password'].hasError('required')">
+                      Password is required
+                    </md-error>
+                    <md-error *ngIf="companyProfile.controls['password'].hasError('minlength')">
+                      Password is too short
+                    </md-error>
+                  </md-input-container>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <md-input-container floatPlaceholder="auto" class="full-width-input">
+                    <input mdInput formControlName="new_password" name="new_password" type="password" required
+                           minlength="6"
+                           placeholder="New Password">
+                    <span mdPrefix></span>
+                    <span mdSuffix></span>
+                    <md-error *ngIf="companyProfile.controls['new_password'].hasError('required')">
+                      Password is required
+                    </md-error>
+                    <md-error *ngIf="companyProfile.controls['new_password'].hasError('minlength')">
+                      Password is too short
+                    </md-error>
+                    <md-error *ngIf="companyProfile.controls['new_password'].hasError('isSame')">
+                      Cant use the same password as your old one.
+                    </md-error>
+
+                  </md-input-container>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+        </md-card-content>
+        <md-card-actions align="end">
+          <button md-raised-button type="submit"
+                  [disabled]="companyProfile.pristine || companyProfile.invalid">
+            change Password
+          </button>
+        </md-card-actions>
+      </form>
+    </md-card>
+  </div>
+</div>

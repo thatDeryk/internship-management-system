@@ -1,0 +1,29 @@
+<h5 mdDialogTitle>Please Enter reason for declining this Log</h5>
+
+<form name="declineForm" [formGroup]="declineForm" class="review-form">
+  <md-dialog-content mdDialogContent class="dialog-content">
+    <div class="login-form">
+
+      <md-input-container floatPlaceholder="auto" class="full-input-container">
+          <textarea mdInput mdTextareaAutosize  name="decline_reason" required mdAutosizeMinRows="4"
+                    formControlName="decline_reason" #reason minlength="10"
+                    placeholder="Reason"></textarea>
+        <md-hint align="end">
+          {{reason.value.length}} / 10
+        </md-hint>
+        <md-error *ngIf="declineForm.controls['decline_reason'].hasError('required')">
+          Please enter a review.
+        </md-error>
+        <md-error *ngIf="declineForm.controls['decline_reason'].hasError('minlength')">
+          More Explanation needed.
+        </md-error>
+      </md-input-container>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions class="dialog-action">
+    <button md-button mdDialogClose>Cancel</button>
+    <button md-button md-raised-button [disabled]="declineForm.pristine || declineForm.invalid"
+            [md-dialog-close]="declineForm.value">Submit</button>
+  </md-dialog-actions>
+</form>
