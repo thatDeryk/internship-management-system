@@ -6,4 +6,4 @@
 
 
 ## Description
-Online internship managmenet system was developed to aid the process of appying for internship and keeping track of the interns progress. The system was developed using angular and angular material design for the front-end and is surported be a backend written in php and mysqli database.
+Online internship managmenet system was developed to aid the process of appying for internship and keeping track of the interns progress. The system was developed using angular and angular material design for the front-end and is surported with a backend written in php and mysqli database.
